@@ -6,7 +6,7 @@ import RightNav from '../RightNav'
 
 function Header(props) {
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <>

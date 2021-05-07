@@ -23,14 +23,13 @@ export const Nav = styled.nav`
 
   @media (max-width: 678px) {
     width: 100vw;
-    justify-content: center;
+    justify-content: space-between;
   }
 `
 
 export const StyledBurger = styled.div`
   width: 24px;
   height: 24px;
-  position: fixed;
   top: 15px;
   left: 20px;
   z-index: 20;
