@@ -1,18 +1,26 @@
 import { useEffect, useState } from 'react'
 import Carousel from 'react-elastic-carousel'
-import Item from '../components/Item'
-
-import Header from '../components/Header'
-import * as S from '../styles/Home'
-import api from '../api'
 import Image from 'next/image'
 
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Item from '../components/Item'
+import CardMobile from '../components/CardMobile'
+import Card from '../components/Card'
+import * as S from '../styles/Home'
+import api from '../api'
+
 export default function Home() {
+  const [movies, setMovies] = useState([]);
   const [newMovies, setNewMovies] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [genreMovie, setGenreMovie] = useState([]);
+  const [catalogMovies, setCatalogMovies] = useState([]);
+  const [oneColumn, setOneColumn] = useState();
+  const [page, setPage] = useState(1);
+  const [width, setWidth] = useState(0);
 
   useEffect(() => {
+    setWidth(window.innerWidth)
     // Get movies of the week
     api.get(`/trending/movie/week?api_key=${process.env.API_KEY}&language=pt-BR`)
       .then(function (response) {
@@ -30,7 +38,13 @@ export default function Home() {
       })
       .catch(function (error) {
         console.warn("Ocorreu um erro ao consultar gêneros!");
-      })
+      });
+
+    handleGetPopularMovies();
+
+    if (localStorage.getItem("column") !== undefined) {
+      setOneColumn(localStorage.getItem("column"))
+    }
   }, []);
 
   const breakPoints = [
@@ -41,7 +55,19 @@ export default function Home() {
     { width: 1200, itemsToShow: 4, itemsToScroll: 4 }
   ];
 
-  function Genre(e) {
+  function handleGetPopularMovies() {
+    //GET movies popular
+    api.get(`/movie/popular?api_key=${process.env.API_KEY}&language=pt-BR&page=${page}`)
+      .then(function (response) {
+        console.log(response.data.results);
+        setMovies(response.data.results);
+      })
+      .catch(function (error) {
+        console.warn("Ocorreu um erro ao consultar filmes!");
+      })
+  }
+
+  function HandleGenreCarrousel(e) {
     let genreData = [];
     e.map(data => {
       const result = genres.find(genre => genre.id === data);
@@ -50,8 +76,14 @@ export default function Home() {
       }
     })
 
-    let generStr = genreData.join(', ')
+    // let generStr = genreData.join(', ')
+    let generStr = `${genreData[0]}, ${genreData[1]}`
     return generStr
+  };
+
+  function handleColumn(e) {
+    setOneColumn(e.target.value);
+    localStorage.setItem("column", e.target.value)
   }
 
   return (
@@ -83,7 +115,7 @@ export default function Home() {
                         </p>
                         <div className="genre">
                           <p>
-                            {Genre(movie.genre_ids)}
+                            {HandleGenreCarrousel(movie.genre_ids)}
                           </p>
                         </div>
                         <div className="vote">
@@ -105,6 +137,68 @@ export default function Home() {
           </S.Carousel>
         </div>
       </S.Content>
+
+      <S.CatalogHeader>
+        <h2><span></span> <p>CATÁLOGO &nbsp;</p> COMPLETO</h2>
+      </S.CatalogHeader>
+
+      <S.Catalog>
+        <div className="options">
+          <div>
+            <select name="select">
+              <option value="">
+                por gênero
+               </option>
+              {genres.map(genre => {
+                return (
+                  <option key={genre.id} value={genre.id}>
+                    {genre.name}
+                  </option>
+                )
+              })}
+            </select>
+            <button>
+              mais populares
+          </button>
+          </div>
+          <div className="column">
+            <select onChange={e => handleColumn(e)} value={oneColumn}>
+              <option value="list">em lista</option>
+              <option value="grid">em grid</option>
+            </select>
+          </div>
+        </div>
+
+        <S.Movie >
+          {movies.map(movie => {
+            if (width < 620) {
+              return (
+                <CardMobile
+                  column={oneColumn}
+                  img={movie.poster_path}
+                  title={movie.original_title}
+                  genrers={HandleGenreCarrousel(movie.genre_ids)}
+                  vote={movie.vote_average}
+                  desc={movie.overview}
+                />
+              )
+            } else {
+              return (
+                <Card
+                  column={oneColumn}
+                  img={movie.poster_path}
+                  title={movie.original_title}
+                  genrers={HandleGenreCarrousel(movie.genre_ids)}
+                  vote={movie.vote_average}
+                  desc={movie.overview}
+                />
+              )
+            }
+
+          })}
+        </S.Movie>
+      </S.Catalog>
+      <Footer />
     </>
   )
 }
