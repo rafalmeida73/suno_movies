@@ -1,18 +1,34 @@
 import React from 'react';
 import Image from 'next/image'
+import Link from 'next/link'
 
-import * as S from './styles';
+import * as S from './styles'
 
 function Card(props) {
   return (
     <>
       <S.Card oneColumn={props.column}>
-        <div className="image">
-          <Image
-            src={`https://image.tmdb.org/t/p/w500/${props.img}`}
-            height="231.74"
-            width="156.74"
-          />
+        <div className="container">
+          <div className="image">
+            <Image
+              src={`https://image.tmdb.org/t/p/w500/${props.img}`}
+              height="231.74"
+              width="156.74"
+            />
+          </div>
+          <div className="overlay">
+            <Link href={`/movie/${props.id}`}>
+              <a className="icon">
+                <Image
+                  src={`/play-circle-outline.png`}
+                  alt={`Imagem com a capa do filme`}
+                  height="64"
+                  width="64"
+                  className="a fa-user"
+                />
+              </a>
+            </Link>
+          </div>
         </div>
         <div className="info">
           <div className="title">

@@ -113,6 +113,62 @@ export const Carousel = styled.div`
       box-shadow: 0 0 2px 0px #333;
     }
   }
+
+  .container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px
+  }
+
+  .container div:first-of-type{
+    position: unset !important
+  }
+
+  .image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    transition: .3s ease;
+    background-color:rgba(254,49,137,0.3);
+    display: none
+  }
+
+  .container:hover .overlay{
+    display: block
+  }
+
+  .container:hover .overlay {
+    opacity: 1;
+  }
+
+  .icon {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .overlay img{
+    background: none
+  }
+
+  .fa-user:hover {
+    color: #eee;
+  }
 `
 
 export const CatalogHeader = styled.div`

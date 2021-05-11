@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image'
+import Link from 'next/link'
 
 import * as S from './styles';
 
@@ -9,11 +10,15 @@ function CardMobile(props) {
       <S.Card oneColumn={props.column}>
         <div className="infos">
           <div className="image">
-            <Image
-              src={`https://image.tmdb.org/t/p/w500/${props.img}`}
-              height="231.74"
-              width="156.74"
-            />
+            <Link href={`/movie/${props.id}`}>
+              <a>
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500/${props.img}`}
+                  height="231.74"
+                  width="156.74"
+                />
+              </a>
+            </Link>
           </div>
           <div className="info">
             <div className="title">

@@ -119,11 +119,28 @@ export default function Home() {
                 return (
                   <Item key={movie.id}>
                     <div>
-                      <Image
-                        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                        height="328.27"
-                        width="218.53"
-                      />
+                      <div className="container">
+                        <Image
+                          src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                          alt={`Imagem com a capa do filme ${movie.original_title}`}
+                          height="328.27"
+                          width="218.53"
+                        />
+                        <div className="overlay">
+                          <Link href={`/movie/${movie.id}`}>
+                            <a className="icon">
+                              <Image
+                                src={`/play-circle-outline.png`}
+                                alt={`Imagem com a capa do filme`}
+                                height="64"
+                                width="64"
+                                className="a fa-user"
+                              />
+                            </a>
+                          </Link>
+                        </div>
+                      </div>
+
                       <div>
                         <p>
                           {
@@ -142,6 +159,7 @@ export default function Home() {
                         <div className="vote">
                           <Image
                             src="/star-outline.svg"
+                            alt="Estrela rosa"
                             height="18"
                             width="16.36"
                           />
@@ -196,6 +214,7 @@ export default function Home() {
               return (
                 <CardMobile
                   key={movie.id}
+                  id={movie.id}
                   column={oneColumn}
                   img={movie.poster_path}
                   title={movie.original_title}
@@ -208,6 +227,7 @@ export default function Home() {
               return (
                 <Card
                   key={movie.id}
+                  id={movie.id}
                   column={oneColumn}
                   img={movie.poster_path}
                   title={movie.original_title}
