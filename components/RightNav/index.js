@@ -16,7 +16,7 @@ function RightNav(props) {
            </a>
           </li>
         </Link>
-        <Link href="/menu2">
+        <Link href="/#catalog">
           <li className={`${props.active === 'catalog' ? 'active' : ''}`}>
             <a>
               CATÁLOGO

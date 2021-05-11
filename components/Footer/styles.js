@@ -5,11 +5,12 @@ export const Footer = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 112px;
+
 
   p{
     font-size: 13.59px;
     color: #EAEAEA;
-    height: 112px
   }
 
   @media (min-width: 768px) {

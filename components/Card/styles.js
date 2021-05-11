@@ -57,7 +57,7 @@ export const Card = styled.div`
     }
 
     .info{
-      width: fit-content;
+      width: 100%;
     }
   }
 `

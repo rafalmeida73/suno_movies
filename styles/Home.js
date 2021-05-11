@@ -209,6 +209,10 @@ export const Catalog = styled.div`
     border-radius: 3.20398px;
   }
 
+  button:hover, button:focus{
+    background: linear-gradient(180deg, var(--pink-dark) 0%, var(--pink-dark) 100%), var(--pink-dark);
+  }
+
   .column{
     display: none
   }
@@ -238,4 +242,14 @@ export const Catalog = styled.div`
 export const Movie = styled.div`
   display: flex;
   flex-wrap: wrap;
+`
+
+export const More = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button{
+    margin: 60px 0;
+  }
 `

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Carousel from 'react-elastic-carousel'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -14,15 +15,15 @@ export default function Home() {
   const [movies, setMovies] = useState([]);
   const [newMovies, setNewMovies] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [catalogMovies, setCatalogMovies] = useState([]);
+  const [genre, setGenre] = useState("por gênero");
   const [oneColumn, setOneColumn] = useState();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
     setWidth(window.innerWidth)
     // Get movies of the week
-    api.get(`/trending/movie/week?api_key=${process.env.API_KEY}&language=pt-BR`)
+    api.get(`/trending/movie/week?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=pt-BR`)
       .then(function (response) {
         // console.log(response.data.results);
         setNewMovies(response.data.results);
@@ -31,7 +32,7 @@ export default function Home() {
         console.warn("Ocorreu um erro ao consultar filmes!");
       });
     //GET genres
-    api.get(`/genre/movie/list?api_key=${process.env.API_KEY}&language=pt-BR`)
+    api.get(`/genre/movie/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=pt-BR`)
       .then(function (response) {
         // console.log(response.data);
         setGenres(response.data.genres);
@@ -57,14 +58,15 @@ export default function Home() {
 
   function handleGetPopularMovies() {
     //GET movies popular
-    api.get(`/movie/popular?api_key=${process.env.API_KEY}&language=pt-BR&page=${page}`)
+    api.get(`/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=pt-BR&page=${page + 1}`)
       .then(function (response) {
-        console.log(response.data.results);
+        // console.log(response.data.results);
         setMovies(response.data.results);
       })
       .catch(function (error) {
         console.warn("Ocorreu um erro ao consultar filmes!");
-      })
+      });
+    setPage(page + 1)
   }
 
   function HandleGenreCarrousel(e) {
@@ -86,9 +88,28 @@ export default function Home() {
     localStorage.setItem("column", e.target.value)
   }
 
+  function handleFilterByGenrer(e) {
+    setGenre(e.id)
+    //GET movies by genrer
+    api.get(
+      `/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=pt-BR&with_genres=${e.id}&page=1sc&include_adult=false${e.popularity ? '&sort_by=popularity.desc' : 'vote_average.desc'}`
+    )
+      .then(function (response) {
+        //  console.log(response.data.results);
+        setMovies(response.data.results);
+      })
+      .catch(function (error) {
+        console.warn("Ocorreu um erro ao consultar filmes!");
+      })
+  }
+
+  function handleMoreMovies() {
+
+  }
+
   return (
     <>
-      <Header active="home" />
+      <Header active="catalog" />
       <S.Content>
         <div className="carrousel">
           <h1> <span></span> <p>Lançamentos &nbsp;</p> da semana</h1>
@@ -138,14 +159,14 @@ export default function Home() {
         </div>
       </S.Content>
 
-      <S.CatalogHeader>
+      <S.CatalogHeader id="catalog">
         <h2><span></span> <p>CATÁLOGO &nbsp;</p> COMPLETO</h2>
       </S.CatalogHeader>
 
       <S.Catalog>
         <div className="options">
           <div>
-            <select name="select">
+            <select onChange={e => handleFilterByGenrer({ id: e.target.value, popularity: false })} value={genre}>
               <option value="">
                 por gênero
                </option>
@@ -157,7 +178,7 @@ export default function Home() {
                 )
               })}
             </select>
-            <button>
+            <button onClick={() => handleFilterByGenrer({ id: genre, popularity: true })}>
               mais populares
           </button>
           </div>
@@ -174,6 +195,7 @@ export default function Home() {
             if (width < 620) {
               return (
                 <CardMobile
+                  key={movie.id}
                   column={oneColumn}
                   img={movie.poster_path}
                   title={movie.original_title}
@@ -185,6 +207,7 @@ export default function Home() {
             } else {
               return (
                 <Card
+                  key={movie.id}
                   column={oneColumn}
                   img={movie.poster_path}
                   title={movie.original_title}
@@ -194,9 +217,16 @@ export default function Home() {
                 />
               )
             }
-
           })}
         </S.Movie>
+
+        <S.More>
+          <Link href="/#catalog">
+            <button onClickCapture={() => handleGetPopularMovies()}>
+              carregar mais
+          </button>
+          </Link>
+        </S.More>
       </S.Catalog>
       <Footer />
     </>

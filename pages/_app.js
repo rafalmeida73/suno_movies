@@ -1,10 +1,17 @@
-import App from 'next/app'
+import Head from 'next/head'
 
 import '../styles/globals.css'
 
-export default class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props
-    return <Component {...pageProps} />
-  }
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <Head>
+        <title>Suno Movies</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Component {...pageProps} />
+    </>
+  )
 }
+
+export default MyApp
