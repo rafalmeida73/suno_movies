@@ -103,10 +103,6 @@ export default function Home() {
       })
   }
 
-  function handleMoreMovies() {
-
-  }
-
   return (
     <>
       <Header active="catalog" />

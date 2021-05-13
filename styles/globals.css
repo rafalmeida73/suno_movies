@@ -1,6 +1,6 @@
 :root {
   --primary: #1B1B1F;
-  --primary-clean: #212125  ;
+  --primary-clean: #212125;
   --pink: #FE3189;
   --pink-dark: #FF006E;
 }
@@ -17,6 +17,12 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-button, a, div{
+button, a, div, input {
   outline: none;
+}
+
+.filter {
+  filter: grayscale(100%) brightness(8%);
+  -webkit-filter: grayscale(100%) brightness(8%);
+  -moz-filter: grayscale(100%) brightness(8%);
 }

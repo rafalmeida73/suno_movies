@@ -79,16 +79,16 @@ export const Carousel = styled.div`
 
   .vote{
     display:flex;
-  }
 
-  .vote p{
-    font-weight: 500;
-    font-size: x-large;
-    margin-left: 10px;
-  }
+    p{
+      font-weight: 500;
+      font-size: x-large;
+      margin-left: 10px;
+    }
 
-  .vote img{
-    background: none
+    img{
+      background: none
+    }
   }
 
   .genre p{
@@ -118,11 +118,11 @@ export const Carousel = styled.div`
     position: relative;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 15px
-  }
+    margin-bottom: 15px;
 
-  .container div:first-of-type{
-    position: unset !important
+    div:first-of-type{
+      position: unset !important
+    }
   }
 
   .image {
@@ -141,7 +141,11 @@ export const Carousel = styled.div`
     width: 100%;
     transition: .3s ease;
     background-color:rgba(254,49,137,0.3);
-    display: none
+    display: none;
+
+    img{
+      background: none
+    }
   }
 
   .container:hover .overlay{
@@ -160,10 +164,6 @@ export const Carousel = styled.div`
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
-  }
-
-  .overlay img{
-    background: none
   }
 
   .fa-user:hover {
@@ -220,13 +220,13 @@ export const Catalog = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin: 30px 0
- }
+    margin: 30px 0;
 
- .options div:first-of-type{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    div:first-of-type{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
  }
 
  select{  
@@ -246,11 +246,11 @@ export const Catalog = styled.div`
     font-size: 14.42px;
     color: #EAEAEA;
     font-weight: 600;
-  }
 
-  select option{
-    direction:ltr;
-    color: black
+    option{
+      direction:ltr;
+      color: black
+    }
   }
 
   button{
@@ -263,10 +263,10 @@ export const Catalog = styled.div`
     background: linear-gradient(180deg, var(--pink) 0%, var(--pink) 100%), var(--pink);
     mix-blend-mode: normal;
     border-radius: 3.20398px;
-  }
 
-  button:hover, button:focus{
-    background: linear-gradient(180deg, var(--pink-dark) 0%, var(--pink-dark) 100%), var(--pink-dark);
+    &hover, &focus{
+      background: linear-gradient(180deg, var(--pink-dark) 0%, var(--pink-dark) 100%), var(--pink-dark);
+    }
   }
 
   .column{
@@ -276,12 +276,12 @@ export const Catalog = styled.div`
   @media (min-width: 768px) {
     .options{
       display: flex;
-      justify-content: space-between
-    }
+      justify-content: space-between;
 
-    .options div:first-of-type{
+    div:first-of-type{
       flex-direction: row
     }
+  }
 
     button{
       margin-left: 15px

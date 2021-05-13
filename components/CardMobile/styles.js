@@ -13,7 +13,6 @@ export const Card = styled.div`
   }
 
   .info{
-    /* width:  ${(props) => props.oneColumn === 'list' ? '45%' : '100%'} */
     width: 45%
   }
 

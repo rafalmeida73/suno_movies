@@ -5,11 +5,24 @@ export const Card = styled.div`
   margin: 40px 0;
 
   .image{
-    width: 45%
+    width: 45%;
+    display: block;
+    width: 100%;
+    height: auto;
+
+    div:first-of-type{
+      height: 100%
+    }
   }
 
   .info{
-    width: 45%
+    width: 45%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    margin-left: 5%;
   }
 
   .genre{
@@ -20,6 +33,7 @@ export const Card = styled.div`
 
   .vote{
     display: flex;
+    margin-bottom: 1px;
   }
 
   .desc p{
@@ -28,39 +42,16 @@ export const Card = styled.div`
     font-weight: 300
   }
 
-  .image div:first-of-type{
-    height: 100%
- }
- 
- .info{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    margin-left: 5%;
-  }
-
   .title, .vote, .genre{
     width: 100%
   }
 
-  .vote{
-    margin-bottom: 1px;
-  }
-
   .container {
     position: relative;
-  }
 
-  .container div:first-of-type{
-    position: unset !important
-  }
-
-  .image {
-    display: block;
-    width: 100%;
-    height: auto;
+    div:first-of-type{
+      position: unset !important
+    }
   }
 
   .overlay {
@@ -73,7 +64,11 @@ export const Card = styled.div`
     width: 100%;
     transition: .3s ease;
     background-color:rgba(254,49,137,0.3);
-    display: none
+    display: none;
+
+    img{
+      background: none
+    }
   }
 
   .container:hover .overlay{
@@ -92,10 +87,6 @@ export const Card = styled.div`
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
-  }
-
-  .overlay img{
-    background: none
   }
 
   .fa-user:hover {
