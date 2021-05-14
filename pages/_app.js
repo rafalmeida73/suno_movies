@@ -18,7 +18,10 @@ function MyApp({ Component, pageProps }) {
           name="description"
           content="Suno Movies é um site para você encontrar diversos filmes interessantes!"
         />
-
+        <meta
+          name='viewport'
+          content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+        />
         {/* <!-- Open Graph / Facebook --> */}
         <meta
           property="og:type"
@@ -60,14 +63,19 @@ function MyApp({ Component, pageProps }) {
         <meta
           property="twitter:image"
           content="https://suno-movies-livid.vercel.app/tag.png" />
+        <meta
+          name='theme-color'
+          content='#1B1B1F'
+        />
+        <link rel='apple-touch-icon' href='/logo192.png'></link>
       </Head>
       <CountProvider>
-      <NProgress
-        color="#fff"
-        options={{ trickleSpeed: 50 }}
-        showAfterMs={500}
-        spinner
-      />
+        <NProgress
+          color="#fff"
+          options={{ trickleSpeed: 50 }}
+          showAfterMs={500}
+          spinner
+        />
         <Component {...pageProps} />
       </CountProvider>
     </>
