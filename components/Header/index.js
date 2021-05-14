@@ -4,11 +4,12 @@ import Image from 'next/image'
 
 import * as S from './styles'
 import api from '../../api'
+import { useSearch } from "../../context/search";
+import SearchIcon from '../../components/SearchIcon'
 
 function Header(props) {
-
+  const { search, setSearch } = useSearch();
   const [open, setOpen] = useState(true);
-  const [search, setSearch] = useState(false);
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
 
@@ -57,7 +58,7 @@ function Header(props) {
   return (
     <>
       <S.Nav>
-        <S.StyledBurger open={open} onClick={() => setOpen(!open)}>
+        <S.StyledBurger open={open} onClick={() => { setOpen(!open); setSearch(false) }}>
           <div />
           <div />
           <div />
@@ -67,6 +68,9 @@ function Header(props) {
             SUNO <span>MOVIES</span>
           </a>
         </Link>
+        <S.SearchMobile onClick={() => { setSearch(!search); setOpen(true) }}>
+          <SearchIcon />
+        </S.SearchMobile>
         <S.Ul open={open}>
           <Link href="/">
             <li className={`${props.active === 'home' ? 'active' : ''}`}>
@@ -82,13 +86,8 @@ function Header(props) {
            </a>
             </li>
           </Link>
-          <S.Search onClick={() => setSearch(!search)}>
-            <Image
-              src="/search-outline.svg"
-              alt="Icone de uma lupa em branco"
-              width={24}
-              height={24}
-            />
+          <S.Search onClick={() => { setSearch(!search); setOpen(true) }}>
+            <SearchIcon />
           </S.Search>
         </S.Ul>
       </S.Nav>
@@ -106,7 +105,7 @@ function Header(props) {
                         <div className="image">
                           <Image
                             src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                            alt="Icone de uma lupa em branco"
+                            alt={`Capa do filme ${movie.title}`}
                             width={98}
                             height={147}
                           />
@@ -137,6 +136,7 @@ function Header(props) {
                               src="/star-outline.svg"
                               height="18"
                               width="16.36"
+                              alt="Uma estrela de cinco pontas rosa"
                             />
                             <p>
                               {movie.vote_average}

@@ -8,13 +8,14 @@ export const Content = styled.main`
   flex-direction: column;
   background-image: url("section.png");
   background-position: center;
+  background-size: cover;
 
   h1{
     display: flex;
     align-items: center;
     font-size: 16.67px;
     font-weight: 100;
-    padding: 10vh 15vw 0 15vw; 
+    padding: 10vh 7vw 0 7vw; 
   }
 
   h1 p{
@@ -46,7 +47,7 @@ export const Content = styled.main`
 `
 
 export const Carousel = styled.div`
-  padding: 5vh 8vw;
+  padding: 5vh 7vw;
 
   img {
     background: #f6f7f8;
@@ -175,7 +176,7 @@ export const CatalogHeader = styled.div`
   background-color:  var(--primary-clean);
   border-top: 2px solid var(--pink);
   height: 107px;
-  padding: 0 15vw;
+  padding: 0 7vw;
   display: flex;
   align-items: center;
   box-shadow:  20px 20px 60px #17171a,
@@ -213,14 +214,14 @@ export const CatalogHeader = styled.div`
 `
 
 export const Catalog = styled.div`
- padding: 0 15vw;
+ padding: 0 7vw;
 
   .options{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin: 30px 0;
+    padding-top: 30px;
 
     div:first-of-type{
       display: flex;

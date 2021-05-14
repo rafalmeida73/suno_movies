@@ -10,8 +10,11 @@ import CardMobile from '../components/CardMobile'
 import Card from '../components/Card'
 import * as S from '../styles/Home'
 import api from '../api'
+import { useSearch } from "../context/search";
+
 
 export default function Home() {
+  const { search } = useSearch();
   const [movies, setMovies] = useState([]);
   const [newMovies, setNewMovies] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -106,7 +109,7 @@ export default function Home() {
   return (
     <>
       <Header active="catalog" />
-      <S.Content>
+      <S.Content className={`${search ? "filter" : ""}`}>
         <div className="carrousel">
           <h1> <span></span> <p>Lançamentos &nbsp;</p> da semana</h1>
           <S.Carousel>
@@ -118,7 +121,7 @@ export default function Home() {
                       <div className="container">
                         <Image
                           src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                          alt={`Imagem com a capa do filme ${movie.original_title}`}
+                          alt={`Capa do filme ${movie.original_title}`}
                           height="328.27"
                           width="218.53"
                         />
@@ -127,7 +130,7 @@ export default function Home() {
                             <a className="icon">
                               <Image
                                 src={`/play-circle-outline.png`}
-                                alt={`Imagem com a capa do filme`}
+                                alt={`Seta de play e pause branco`}
                                 height="64"
                                 width="64"
                                 className="a fa-user"
@@ -158,6 +161,7 @@ export default function Home() {
                             alt="Estrela rosa"
                             height="18"
                             width="16.36"
+                            alt="Uma estrela de cinco pontas rosa"
                           />
                           <p>
                             {movie.vote_average}
@@ -173,11 +177,11 @@ export default function Home() {
         </div>
       </S.Content>
 
-      <S.CatalogHeader id="catalog">
+      <S.CatalogHeader id="catalog" className={`${search ? "filter" : ""}`}>
         <h2><span></span> <p>CATÁLOGO &nbsp;</p> COMPLETO</h2>
       </S.CatalogHeader>
 
-      <S.Catalog>
+      <S.Catalog className={`${search ? "filter" : ""}`}>
         <div className="options">
           <div>
             <select onChange={e => handleFilterByGenrer({ id: e.target.value, popularity: false })} value={genre}>

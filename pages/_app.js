@@ -1,6 +1,8 @@
 import Head from 'next/head'
+import NProgress from 'next-nprogress-emotion'
 
 import '../styles/globals.css'
+import CountProvider from "../context/search"
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -59,7 +61,15 @@ function MyApp({ Component, pageProps }) {
           property="twitter:image"
           content="https://suno-movies-livid.vercel.app/tag.png" />
       </Head>
-      <Component {...pageProps} />
+      <CountProvider>
+      <NProgress
+        color="#fff"
+        options={{ trickleSpeed: 50 }}
+        showAfterMs={500}
+        spinner
+      />
+        <Component {...pageProps} />
+      </CountProvider>
     </>
   )
 }

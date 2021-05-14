@@ -6,7 +6,7 @@ export const Content = styled.main`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 40px 20px;
+  padding: 0 7vw;
 
   img {
     background: #f6f7f8;
@@ -42,7 +42,8 @@ export const Content = styled.main`
     margin: 20px 0;
 
     p{
-    color: var(--pink)
+      color: var(--pink);
+      font-size: 24px;
     }
 
     img{
@@ -111,9 +112,9 @@ export const Content = styled.main`
     }
   }
 
-  iframe .ytp-large-play-button.ytp-touch-device .ytp-large-play-button-bg, .ytp-cued-thumbnail-overlay:hover .ytp-large-play-button-bg, .ytp-muted-autoplay-endscreen-overlay:hover .ytp-large-play-button-bg {
-  fill: var(--pink-dark) !important;
-}
+    .content{
+      margin-top: 40px;
+    }
 
   @media (min-width: 768px) {
     .image{
@@ -124,6 +125,7 @@ export const Content = styled.main`
     .video{
       width: 100%;
     }
+
   }
 
   @media (min-width: 1100px) {
@@ -132,7 +134,6 @@ export const Content = styled.main`
       min-height: 100vh;
       justify-content: center;
       align-items: center;
-      padding: 0 10vh;
     }
 
     .image{
@@ -161,7 +162,6 @@ export const Content = styled.main`
 
     .video{
       width: 100%;
-      padding: 0 10vh;
 
       h3{
         width: 100%;

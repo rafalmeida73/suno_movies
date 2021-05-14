@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Nav = styled.nav`
   height: 10vh;
-  padding: 0 15vw;
+  padding: 0 7vw;
   display: flex;
   justify-content: space-between;
   background-color: var(--primary-clean);
@@ -23,9 +23,9 @@ export const Nav = styled.nav`
     color: var(--pink)
   }
 
-  @media (max-width: 678px) {
-    width: 100vw;
+  @media (min-width: 678px) {
     justify-content: space-between;
+    padding: 0 7vw;
   }
 `
 
@@ -118,16 +118,25 @@ export const Ul = styled.ul`
 `
 
 export const Search = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: none;
 
-    div:first-of-type{
+    @media (min-width: 768px) {
+      margin-left: 0;
       padding: 0 20px;
     }
 
+    @media (min-width: 1100px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+`
+
+export const SearchMobile = styled.div`
+    display: none;
+
     @media (max-width: 768px) {
-      margin-left: 0
+      display: block;
     }
 `
 
@@ -135,7 +144,7 @@ export const SearchBlock = styled.div`
   .view{
     min-height: 360px;
     background-color: var(--primary-clean);
-    padding: 5vh 15vw;
+    padding: 5vh 7vw;
 
     input{
       width: 100%;
@@ -233,4 +242,10 @@ export const SearchBlock = styled.div`
       }
     }
   }
+
+  @media (min-width: 768px) {
+      .view{
+        padding: 5vh 15vw;
+      }
+    }
 `

@@ -14,6 +14,7 @@ function CardMobile(props) {
               <a>
                 <Image
                   src={`https://image.tmdb.org/t/p/w500/${props.img}`}
+                  alt={`Capa do filme ${props.title}`}
                   height="231.74"
                   width="156.74"
                 />
@@ -34,6 +35,7 @@ function CardMobile(props) {
                 src="/star-outline.svg"
                 height="18"
                 width="16.36"
+                alt="Uma estrela de cinco pontas rosa"
               />
               <p>
                 {props.vote}
